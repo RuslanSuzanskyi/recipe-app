@@ -3,13 +3,21 @@ import { ReactNode } from "react";
 export interface SearchParamsProps {
   query?: string;
   cuisine?: string;
-  maxTime?: string;
+  maxReadyTime?: string;
 };
 
+export interface SearchFormProps {
+  searchParams: SearchParamsProps;
+  setSearchParams: (params: SearchParamsProps) => void;
+  onSubmit: (event: React.FormEvent) => void;
+}
+
 export interface RecipeProps {
+  extendedIngredients: IngredientProps[];
   id: number;
   title: string;
   image: string;
+  instructions?: string;
   readyInMinutes: number;
   servings: number;
   nutrition?: {
@@ -23,7 +31,16 @@ export interface RecipeProps {
 
 export interface RecipesPageProps {
   searchParams: SearchParamsProps;
-}
+};
+
+export interface RecipeContextType {
+  query: string;
+  setQuery: (query: string) => void;
+  cuisine: string;
+  setCuisine: (cuisine: string) => void;
+  maxReadyTime: string;
+  setMaxReadyTime: (time: string) => void;
+};
 
 export interface RecipeDetailsProps {
   id: number;
@@ -43,18 +60,12 @@ export interface RecipeDetailsProps {
       unit: string;
     }>;
   };
-}
+};
 
 export interface RecipeDetailsPageProps {
   params: {
     id: string;
   };
-}
-
-export interface SearchFormProps {
-  searchParams: SearchParamsProps;
-  setSearchParams: React.Dispatch<React.SetStateAction<SearchParamsProps>>;
-  onSubmit: () => void;
 };
 
 export interface ButtonProps {
@@ -93,8 +104,12 @@ export interface IngredientProps {
   id: number;
   original: string;
 };
+
+export interface RecipeInstructionsProps {
+  instructions: string;
+}
 export interface RecipeIngredientsProps {
   ingredients: IngredientProps[];
-}
+};
 
 

@@ -14,23 +14,25 @@ const CUISINES = [
   'Thai', 'Vietnamese'
 ];
 
-export default function SearchForm({
-  searchParams,
-  setSearchParams,
-  onSubmit
-}: SearchFormProps) {
+export default function SearchForm({ searchParams, setSearchParams, onSubmit }: SearchFormProps) {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     setIsValid(
       !!searchParams.query || 
       !!searchParams.cuisine || 
-      !!searchParams.maxTime
+      !!searchParams.maxReadyTime
     );
   }, [searchParams]);
 
   return (
-    <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+    <form 
+      onSubmit={(e) => { 
+        e.preventDefault(); 
+        onSubmit(e); 
+      }} 
+      className="bg-white p-8 rounded-lg shadow-lg border border-gray-200"
+    >
       <div className="space-y-6">
         <Input
           type="text"
@@ -49,18 +51,18 @@ export default function SearchForm({
         <Input
           type="number"
           placeholder="Max preparation time (minutes)"
-          value={searchParams.maxTime || ''}
-          onChange={(value) => setSearchParams({ ...searchParams, maxTime: value })}
+          value={searchParams.maxReadyTime || ''}
+          onChange={(value) => setSearchParams({ ...searchParams, maxReadyTime: value })}
           className="w-full"
         />
         <Button
-          onClick={onSubmit}
+          type="submit"
           disabled={!isValid}
-          className="w-full mt-6 bg-primary hover:bg-primary-dark text-white py-3 rounded-lg transition-colors"
+          className="w-full mt-6 bg-primary hover:bg-primary-dark text-white py-3 rounded-lg transition-colors cursor-pointer"
         >
           Search Recipes
         </Button>
       </div>
-    </div>
+    </form>
   );
 }

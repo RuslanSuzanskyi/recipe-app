@@ -2,8 +2,8 @@
 
 import { useSearchParams } from 'next/navigation';
 import RecipeList from './RecipeList';
-import { useFetchRecipes } from '../hooks/useFetchRecipes';
 import { Suspense } from 'react';
+import { useFetchRecipes } from '../hooks/useFetchRecipes';
 
 export default function RecipesContent() {
   const searchParams = useSearchParams();
@@ -18,8 +18,8 @@ export default function RecipesContent() {
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<div>Loading recipes...</div>}>
       <RecipeList recipes={recipes || []} />
-    </Suspense> 
+    </Suspense>
   );
 };

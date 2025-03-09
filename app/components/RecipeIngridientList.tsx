@@ -2,6 +2,10 @@ import React from "react";
 import { RecipeIngredientsProps } from "../lib/types";
 
 export default function RecipeIngredientList ({ ingredients }: RecipeIngredientsProps) {
+  if (!ingredients || ingredients.length === 0) {
+    return <p>No ingredients available.</p>;
+  }
+
   const uniqueIngredients = Array.from(new Map(ingredients.map((item) => [item.id, item])).values());
 
   return (
@@ -13,4 +17,4 @@ export default function RecipeIngredientList ({ ingredients }: RecipeIngredients
       </ul>
     </div>
   );
-};
+}

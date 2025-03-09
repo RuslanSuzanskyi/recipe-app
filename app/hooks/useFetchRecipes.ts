@@ -1,65 +1,46 @@
-'use client';
+import { useEffect, useState } from 'react';
+import { RecipeProps } from '../lib/types';
+import { fetchRecipeDetails, fetchRecipes } from '../lib/api';
 
-import { useState, useEffect } from 'react';
-import { RecipeProps, RecipeDetailsProps } from '../lib/types';
+export function useFetchRecipes(query: string, cuisine: string, maxTime?: number) {
+    const [recipes, setRecipes] = useState<RecipeProps[]>([]);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
-export function useFetchRecipes(query: string, cuisine: string, maxTime: number | undefined) {
-  const [recipes, setRecipes] = useState<RecipeProps[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+    useEffect(() => {
+        async function getRecipes() {
+            try {
+                const data = await fetchRecipes(query, cuisine, maxTime?.toString() || '');
+                setRecipes(data.results || []);
+            } catch (err) {
+                setError((err as Error).message);
+            } finally {
+                setLoading(false);
+            }
+        }
 
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-      const url = new URL(`${baseUrl}/api/recipes`);
-      url.searchParams.append('query', query);
-      url.searchParams.append('cuisine', cuisine);
-      if (maxTime) url.searchParams.append('maxTime', maxTime.toString());
+        getRecipes();
+    }, [query, cuisine, maxTime]);
 
-      try {
-        const response = await fetch(url.toString());
-        if (!response.ok) throw new Error(`Ошибка загрузки рецептов: ${response.status}`);
-
-        const data = await response.json();
-        setRecipes(data.results);
-      } catch (err) {
-        setError((err as Error).message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRecipes();
-  }, [query, cuisine, maxTime]);
-
-  return { recipes, loading, error };
-}
+    return { recipes, error, loading };
+};
 
 export function useFetchRecipeDetails(id: string) {
-  const [recipe, setRecipe] = useState<RecipeDetailsProps | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [recipe, setRecipe] = useState<RecipeProps | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchRecipeDetails = async () => {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-      const url = `${baseUrl}/api/recipes/${id}`;
-
+    async function getRecipeDetails() {
       try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error('Failed to fetch recipe details');
-
-        const data = await response.json();
+        const data = await fetchRecipeDetails(id);
         setRecipe(data);
       } catch (err) {
         setError((err as Error).message);
-      } finally {
-        setLoading(false);
       }
-    };
+    }
 
-    fetchRecipeDetails();
+    getRecipeDetails();
   }, [id]);
 
-  return { recipe, loading, error };
+  return { recipe, error };
 }

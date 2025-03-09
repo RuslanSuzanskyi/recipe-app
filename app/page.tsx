@@ -1,25 +1,22 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import SearchForm from './components/SearchForm';
-import { SearchParamsProps } from './lib/types';
 import Container from './components/Container';
+import { useRecipeContext } from './context/RecipeContext';
 
-export default function Home() {
+export default function HomePage() {
   const router = useRouter();
-  const [searchParams, setSearchParams] = useState<SearchParamsProps>({
-    query: '',
-    cuisine: '',
-    maxTime: ''
-  });
+  const { query, setQuery, cuisine, setCuisine, maxReadyTime, setMaxReadyTime } = useRecipeContext();
+  const [disabled, setDisabled] = useState(true);
 
-  const handleSubmit = () => {
-    const params = new URLSearchParams();
-    Object.entries(searchParams).forEach(([key, value]) => {
-      if (value) params.append(key, value);
-    });
-    router.push(`/recipes?${params.toString()}`);
-  };
+  useEffect(() => {
+    setDisabled(!query && !cuisine && !maxReadyTime);
+  }, [query, cuisine, maxReadyTime]);
+
+  function handleSearch() {
+    router.push(`/recipes?query=${query}&cuisine=${cuisine}&maxReadyTime=${maxReadyTime}`);
+  }
 
   return (
     <Container>
@@ -28,11 +25,15 @@ export default function Home() {
           Recipe Finder
         </h1>
         <div className="w-full max-w-2xl fade-in">
-          <SearchForm 
-            searchParams={searchParams}
-            setSearchParams={setSearchParams}
-            onSubmit={handleSubmit}
-          />
+        <SearchForm 
+          searchParams={{ query, cuisine, maxReadyTime }}
+          setSearchParams={(params) => {
+            setQuery(params.query || '');
+            setCuisine(params.cuisine || '');
+            setMaxReadyTime(params.maxReadyTime || '');
+          }}
+          onSubmit={handleSearch}
+        />
         </div>
       </div>  
     </Container>
