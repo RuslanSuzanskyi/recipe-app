@@ -9,7 +9,7 @@ export default function RecipesContent({ recipes }: RecipesContentProps) {
 
   return (
     <Suspense fallback={<div>Loading Recipes...</div>}>
-      <RecipeList recipes={recipes} />;
+      <RecipeList recipes={recipes} />
     </Suspense>
   );
 }
