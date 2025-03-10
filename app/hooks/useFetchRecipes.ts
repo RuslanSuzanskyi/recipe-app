@@ -11,9 +11,10 @@ export function useFetchRecipes(query: string, cuisine: string, maxTime?: number
         async function getRecipes() {
             try {
                 const data = await fetchRecipes(query, cuisine, maxTime?.toString() || '');
-                setRecipes(data.results || []);
+                setRecipes(Array.isArray(data) ? data : []);
             } catch (err) {
                 setError((err as Error).message);
+                setRecipes([]);
             } finally {
                 setLoading(false);
             }

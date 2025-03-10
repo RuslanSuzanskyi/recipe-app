@@ -94,7 +94,7 @@ export interface SelectProps {
 
 export interface RecipeListProps {
   recipes: RecipeProps[];
-}
+};
 
 export interface RecipeDetailsContentProps {
   recipe: RecipeProps | null;
@@ -107,9 +107,13 @@ export interface IngredientProps {
 
 export interface RecipeInstructionsProps {
   instructions: string;
-}
+};
 export interface RecipeIngredientsProps {
   ingredients: IngredientProps[];
+};
+
+export interface RecipesContentProps {
+  recipes: any[];
 };
 
 

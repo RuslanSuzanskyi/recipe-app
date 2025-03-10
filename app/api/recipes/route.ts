@@ -24,8 +24,14 @@ export async function GET(req: Request) {
     }
 
     const data = await res.json();
-    return NextResponse.json(data);
+
+    const headers = new Headers();
+    headers.set('Cache-Control', 's-maxage=60, stale-while-revalidate');
+
+    return NextResponse.json(data, { headers });
+    
   } catch (error) {
+    console.error('Error fetching recipes:', error);
     return NextResponse.json({ error: (error as Error).message }, { status: 500 });
   }
-}
+};

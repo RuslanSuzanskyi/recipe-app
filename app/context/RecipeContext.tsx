@@ -8,7 +8,7 @@ interface RecipeContextType {
     setCuisine: (cuisine: string) => void;
     maxReadyTime: string;
     setMaxReadyTime: (time: string) => void;
-}
+};
 
 const RecipeContext = createContext<RecipeContextType | undefined>(undefined);
 
@@ -22,10 +22,10 @@ export function RecipeProvider({ children }: { children: ReactNode }) {
           {children}
         </RecipeContext.Provider>
     );
-}
+};
 
 export function useRecipeContext() {
     const context = useContext(RecipeContext);
     if (!context) throw new Error("useRecipeContext must be used within a RecipeProvider");
     return context;
-}
+};
