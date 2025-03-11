@@ -41,26 +41,26 @@ export default function SearchForm({ searchParams, setSearchParams, onSubmit }: 
           placeholder="Search recipes..."
           value={searchParams.query || ''}
           onChange={(value) => setSearchParams({ ...searchParams, query: value })}
-          className="w-full"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <Select
           options={CUISINES.map((cuisine) => ({ value: cuisine, label: cuisine }))}
           value={searchParams.cuisine || ''}
           onChange={(value) => setSearchParams({ ...searchParams, cuisine: value })}
           placeholder="Select Cuisine"
-          className="w-full"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <Input
           type="number"
           placeholder="Max preparation time (minutes)"
           value={searchParams.maxReadyTime || ''}
           onChange={(value) => setSearchParams({ ...searchParams, maxReadyTime: value })}
-          className="w-full"
+          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
         />
         <Button
           type="submit"
           disabled={!isValid}
-          className="w-full mt-6 bg-primary hover:bg-primary-dark text-white py-3 rounded-lg transition-colors cursor-pointer"
+          className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
         >
           Search Recipes
         </Button>

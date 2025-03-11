@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
-    const { id } = params;
+    const { id } = await params;
     const apiKey = process.env.SPOONACULAR_API_KEY;
     const url = `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`;
 

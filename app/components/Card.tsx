@@ -4,7 +4,7 @@ import { RecipeProps } from '../lib/types';
 
 export default function Card({ recipe }: { recipe: RecipeProps }) {
   return (
-    <article className="overflow-hidden flex flex-col border border-solid border-black/15">
+    <article className="overflow-hidden flex flex-col max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm">
       <div className="relative aspect-square">
         <Link href={`/recipes/${recipe.id}`}>     
           <Image
@@ -16,9 +16,9 @@ export default function Card({ recipe }: { recipe: RecipeProps }) {
           />
         </Link>
       </div>
-      <div className="p-[0.75rem]">
+      <div className="p-5">
         <Link href={`/recipes/${recipe.id}`}>
-          <h2 className="text-[1.125rem] font-bold font-sans">{recipe.title}</h2>
+          <h2 className="mb-2 text-xl font-bold tracking-tight text-gray-900 font-sans">{recipe.title}</h2>
         </Link>
       </div>
     </article>

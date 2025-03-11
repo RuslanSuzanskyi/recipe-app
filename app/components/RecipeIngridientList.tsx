@@ -9,8 +9,8 @@ export default function RecipeIngredientList ({ ingredients }: RecipeIngredients
   const uniqueIngredients = Array.from(new Map(ingredients.map((item) => [item.id, item])).values());
 
   return (
-    <div>
-      <ul className="list-disc pl-6">
+    <div className="mb-10">
+      <ul className="space-y-4 list-disc list-inside">
         {uniqueIngredients.map((ingredient) => (
           <li key={ingredient.id}>{ingredient.original}</li>
         ))}

@@ -14,6 +14,7 @@ export interface SearchFormProps {
 
 export interface RecipeProps {
   extendedIngredients: IngredientProps[];
+  analyzedInstructions?: InstructionProps[];
   id: number;
   title: string;
   image: string;
@@ -29,6 +30,19 @@ export interface RecipeProps {
   }[];
 };
 
+export interface RecipeInstructionsProps {
+  analyzedInstructions?: InstructionProps[];
+};
+
+export interface InstructionProps {
+  name?: string;
+  steps: StepProps[];
+};
+
+export interface StepProps {
+  number: number;
+  step: string;
+};
 export interface RecipesPageProps {
   searchParams: SearchParamsProps;
 };
