@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { RecipeProps } from '../lib/types';
+import { RecipeProps } from '../types/api';
 import { fetchRecipeDetails, fetchRecipes } from '../lib/api';
 
 export function useFetchRecipes(query: string, cuisine: string, maxTime?: number) {

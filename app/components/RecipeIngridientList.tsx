@@ -1,5 +1,5 @@
 import React from "react";
-import { RecipeIngredientsProps } from "../lib/types";
+import { RecipeIngredientsProps } from "../types/api";
 
 export default function RecipeIngredientList ({ ingredients }: RecipeIngredientsProps) {
   if (!ingredients || ingredients.length === 0) {

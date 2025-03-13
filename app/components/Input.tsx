@@ -1,4 +1,4 @@
-import { InputProps } from '../lib/types';
+import { InputProps } from '../types/api';
 
 export default function Input({ type, placeholder, value, onChange, className = "" }: InputProps) {
   return (

@@ -1,4 +1,4 @@
-import { RecipeInstructionsProps } from "../lib/types";
+import { RecipeInstructionsProps } from "../types/api";
 
 export default function RecipeInstructions({ analyzedInstructions }: RecipeInstructionsProps) {
   if (!analyzedInstructions || analyzedInstructions.length === 0) {

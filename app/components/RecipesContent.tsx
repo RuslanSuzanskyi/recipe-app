@@ -1,6 +1,7 @@
 import RecipeList from './RecipeList';
-import { RecipesContentProps } from '../lib/types';
+import { RecipesContentProps } from '../types/api';
 import { Suspense } from 'react';
+import Loading from './Loading';
 
 export default function RecipesContent({ recipes }: RecipesContentProps) {
   if (!recipes || recipes.length === 0) {
@@ -8,7 +9,7 @@ export default function RecipesContent({ recipes }: RecipesContentProps) {
   }
 
   return (
-    <Suspense fallback={<div>Loading Recipes...</div>}>
+    <Suspense fallback={<Loading />}>
       <RecipeList recipes={recipes} />
     </Suspense>
   );

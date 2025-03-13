@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { SelectProps } from '../lib/types';
+import { SelectProps } from '../types/api';
 
 export default function Select({ options, value, onChange, placeholder, className }: SelectProps) {
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {

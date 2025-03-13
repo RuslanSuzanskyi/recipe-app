@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { RecipeProps } from '../lib/types';
+import { RecipeProps } from '../types/api';
 
 export default function Card({ recipe }: { recipe: RecipeProps }) {
   return (

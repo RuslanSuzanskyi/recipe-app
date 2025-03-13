@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { SearchFormProps } from '../lib/types';
+import { SearchFormProps } from '../types/api';
 import Button from './Button';
 import Input from './Input';
 import Select from './Select';
