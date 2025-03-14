@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import Input from "./Input";
-import { usePathname, useRouter } from "next/navigation";
-import { useRecipeContext } from "../context/RecipeContext";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Container from "./Container";
 
 export default function Header() {
