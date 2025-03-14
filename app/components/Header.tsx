@@ -4,33 +4,18 @@ import Link from "next/link";
 import Input from "./Input";
 import { usePathname, useRouter } from "next/navigation";
 import { useRecipeContext } from "../context/RecipeContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Container from "./Container";
 
 export default function Header() {
   const router = useRouter();
-  const pathname = usePathname();
-  const { query, setQuery, cuisine, maxReadyTime } = useRecipeContext();
-
-  useEffect(() => {
-    setQuery("");
-  }, []);
+  const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearch(event: React.FormEvent) {
     event.preventDefault();
+    if (!searchTerm.trim()) return;
 
-    const params = new URLSearchParams();
-    if (query) params.set("query", query);
-    if (cuisine) params.set("cuisine", cuisine);
-    if (maxReadyTime) params.set("maxReadyTime", maxReadyTime);
-
-    const searchUrl = `/recipes?${params.toString()}`;
-
-    if (pathname !== "/recipes") {
-      router.push(searchUrl);
-    } else {
-      router.replace(searchUrl);
-    };    
+    router.push(`/recipes?query=${searchTerm}`);
   };
 
   return (
@@ -42,8 +27,8 @@ export default function Header() {
             <div className="relative">
               <Input
                 type="text"
-                value={query}
-                onChange={setQuery}
+                value={searchTerm}
+                onChange={setSearchTerm}
                 placeholder="Search"
                 className="block w-full p-4 ps-6 sm:ps-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
               />
